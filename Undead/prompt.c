@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+//#include <std.h>
 
 #include "game.h"
-#include "game_io.h"
+//#include "game_io.h"
 #include "prompt.h"
 
 void ask_command(char* command) {
