@@ -27,7 +27,7 @@ int main(void){
   };
 
   int nb_zombie = 5, nb_ghost = 2, nb_vampire = 2;
-  game g = setup_new_game(dirs,board,nb_zombie,nb_ghost,nb_vampire);
+  game g = setup_new_game(dirs,board,nb_ghost,nb_vampire,nb_zombie);
 
   add_mirror(g, 0, 3, 3);
   add_mirror(g, 0, 3, 1);
@@ -77,7 +77,7 @@ initialisee avec les fonctions de game.h
 
   }
 
-  printf("YOU WIN\n");
+  printf("YOU WIN, CONGRATS !\n");
   printf("GAME OVER\n");
 
   free(command);
