@@ -21,13 +21,37 @@ void ask_command(char* command) {
   }
 }
 
-bool exec_command(game g, char* command) {
-  if(command == NULL){
-    return false;
+char* check_command(char* command) {
+  if(command[0] < 48 || command[0] > 57) {
+    printf("Invalid column index\n");
+    return NULL;
+
+  } else if(command[2] < 48 || command[2] > 57) {
+    printf("Invalid line index\n");
+    return NULL;
+
+  } else if(command[4] != 'Z' || command[4] != 'G' || command[4] != 'V') {
+    if(command[4] != 'z' || command[4] != 'g' || command[4] != 'v') {
+      printf("Monster not recognized\n");
+      return NULL;
+    }
+    command[4] = command[4] + ('A'-'a');
   }
 
+  if(command[1] != 32 || command[3] != 32) {
+    printf("Spaces not respected\n");
+    return NULL;
+  }
+
+  return command;
+}
+
+bool exec_command(game g, char* command) {
+  if(command == NULL)
+    return false;
+
   content monster = EMPTY;
-  char m = command[0];
+  char m = command[4];
   switch( m ) {
     default:  monster = EMPTY;
     break;
@@ -39,17 +63,12 @@ bool exec_command(game g, char* command) {
       break;
   }
 
-  int col = command[2] - '0';
-  int lin = command[4] - '0';
+  int col = command[0] - '0';
+  int lin = command[2] - '0';
 
-  bool in_board = false;
-  if( monster != EMPTY ) {
-    in_board = add_monster(g, monster, col, lin);
-  } else {
-    printf("\nCommand not recognized\n");
-    return false;
-  }
+  bool in_board = add_monster(g, monster, col, lin);
 
+//test if command has been realized
   if( in_board ) {
     printf("\n");
     return true;
