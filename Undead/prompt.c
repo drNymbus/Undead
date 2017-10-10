@@ -21,29 +21,32 @@ void ask_command(char* command) {
   }
 }
 
-char* check_command(char* command) {
+void check_command(char* command) {
   if((int)command[0] < 48 || (int)command[0] > 57) {
     printf("Invalid column index\n");
-    return NULL;
+    free(command);
+    command = NULL;
 
   } else if((int)command[2] < 48 || (int)command[2] > 57) {
     printf("Invalid line index\n");
-    return NULL;
+    free(command);
+    command = NULL;
 
   } else if(command[4] != 'Z' && command[4] != 'G' && command[4] != 'V') {
     if(command[4] != 'z' && command[4] != 'g' && command[4] != 'v') {
       printf("Monster not recognized\n");
-      return NULL;
+      free(command);
+      command = NULL;
     }
     command[4] = command[4] + ('A'-'a');
   }
 
   if((int)command[1] != 32 || (int)command[3] != 32) {
     printf("Spaces not respected\n");
-    return NULL;
+    free(command);
+    command = NULL;
   }
 
-  return command;
 }
 
 bool exec_command(game g, char* command) {

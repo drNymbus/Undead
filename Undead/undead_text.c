@@ -62,6 +62,7 @@ initialisee avec les fonctions de game.h
 
 // displaying board game before asking move
   printf("Display ....\n\n");
+  system("clear");
   print_board(g);
 
   while( !is_game_over(g) ) {
@@ -69,11 +70,13 @@ initialisee avec les fonctions de game.h
 // reading command entered
     ask_command(command);
 // Test if command well entered before executing command entered
-    command = check_command(command);
+    check_command(command);
     display = exec_command(g, command);
 // displaying board game if move is "valid"
-    if( display )
+    if( display ) {
+      system("clear");
       print_board(g);
+    }
 
   }
 
